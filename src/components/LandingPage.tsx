@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Bot, DollarSign, Target, TrendingUp } from "lucide-react";
+import { Loader2, Bot, DollarSign, Target, TrendingUp, Sparkles } from "lucide-react";
 
 export const LandingPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -68,128 +68,146 @@ export const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/10 blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-secondary/10 blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 rounded-full bg-accent/10 blur-xl animate-pulse delay-500"></div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <div className="bg-primary rounded-full p-4">
-              <Bot className="h-12 w-12 text-primary-foreground" />
+        <div className="text-center mb-16">
+          <div className="flex justify-center mb-8">
+            <div className="icon-tech">
+              <Bot className="h-16 w-16 text-primary-foreground" />
             </div>
           </div>
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            FinBot
+          <h1 className="text-7xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent">
+              FinBot
+            </span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Seu assistente financeiro pessoal inteligente. Controle suas finanças, 
-            defina metas e receba insights personalizados via WhatsApp.
+          <div className="flex items-center justify-center gap-2 mb-8">
+            <Sparkles className="h-6 w-6 text-primary animate-pulse" />
+            <p className="text-2xl text-foreground/90 font-medium">
+              Seu assistente financeiro inteligente
+            </p>
+            <Sparkles className="h-6 w-6 text-primary animate-pulse" />
+          </div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Controle suas finanças, defina metas e receba insights personalizados via WhatsApp. 
+            Tecnologia de ponta para revolucionar sua vida financeira.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <Card className="text-center">
-            <CardHeader>
-              <DollarSign className="h-8 w-8 text-primary mx-auto mb-2" />
-              <CardTitle>Controle Total</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Monitore receitas, despesas e categorize suas transações automaticamente
-              </p>
-            </CardContent>
-          </Card>
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="tech-card p-8 text-center group">
+            <div className="icon-tech mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <DollarSign className="h-10 w-10 text-primary-foreground" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4 text-card-foreground">Controle Total</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Monitore receitas, despesas e categorize suas transações automaticamente
+              com inteligência artificial avançada
+            </p>
+          </div>
           
-          <Card className="text-center">
-            <CardHeader>
-              <Target className="h-8 w-8 text-primary mx-auto mb-2" />
-              <CardTitle>Metas Inteligentes</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Defina objetivos financeiros e acompanhe seu progresso em tempo real
-              </p>
-            </CardContent>
-          </Card>
+          <div className="tech-card p-8 text-center group">
+            <div className="icon-tech mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Target className="h-10 w-10 text-primary-foreground" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4 text-card-foreground">Metas Inteligentes</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Defina objetivos financeiros e acompanhe seu progresso em tempo real
+              com análises preditivas
+            </p>
+          </div>
           
-          <Card className="text-center">
-            <CardHeader>
-              <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
-              <CardTitle>Insights Personalizados</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Receba análises e dicas personalizadas direto no seu WhatsApp
-              </p>
-            </CardContent>
-          </Card>
+          <div className="tech-card p-8 text-center group">
+            <div className="icon-tech mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <TrendingUp className="h-10 w-10 text-primary-foreground" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4 text-card-foreground">Insights Personalizados</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Receba análises e dicas personalizadas direto no seu WhatsApp
+              com relatórios automatizados
+            </p>
+          </div>
         </div>
 
         {/* Cadastro Form */}
-        <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">Comece Agora</CardTitle>
-              <CardDescription className="text-center">
+        <div className="max-w-lg mx-auto">
+          <div className="tech-card p-8">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-3 text-card-foreground">Comece Agora</h2>
+              <p className="text-muted-foreground">
                 Cadastre-se gratuitamente e transforme sua vida financeira
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="nome">Nome Completo</Label>
-                  <Input
-                    id="nome"
-                    type="text"
-                    placeholder="Seu nome completo"
-                    value={formData.nome}
-                    onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="telefone">WhatsApp</Label>
-                  <Input
-                    id="telefone"
-                    type="tel"
-                    placeholder="(11) 99999-9999"
-                    value={formData.telefone_whatsapp}
-                    onChange={(e) => setFormData({ ...formData, telefone_whatsapp: e.target.value })}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="pin">PIN de Segurança (6 dígitos)</Label>
-                  <Input
-                    id="pin"
-                    type="password"
-                    placeholder="••••••"
-                    maxLength={6}
-                    value={formData.pin_seguranca}
-                    onChange={(e) => setFormData({ ...formData, pin_seguranca: e.target.value })}
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Cadastrando...
-                    </>
-                  ) : (
-                    "Cadastrar Gratuitamente"
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+              </p>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="input-tech">
+                <Label htmlFor="nome" className="text-card-foreground font-medium">Nome Completo</Label>
+                <Input
+                  id="nome"
+                  type="text"
+                  placeholder="Seu nome completo"
+                  value={formData.nome}
+                  onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                  className="mt-2 h-12 text-base"
+                  required
+                />
+              </div>
+              
+              <div className="input-tech">
+                <Label htmlFor="telefone" className="text-card-foreground font-medium">WhatsApp</Label>
+                <Input
+                  id="telefone"
+                  type="tel"
+                  placeholder="(11) 99999-9999"
+                  value={formData.telefone_whatsapp}
+                  onChange={(e) => setFormData({ ...formData, telefone_whatsapp: e.target.value })}
+                  className="mt-2 h-12 text-base"
+                  required
+                />
+              </div>
+              
+              <div className="input-tech">
+                <Label htmlFor="pin" className="text-card-foreground font-medium">PIN de Segurança (6 dígitos)</Label>
+                <Input
+                  id="pin"
+                  type="password"
+                  placeholder="••••••"
+                  maxLength={6}
+                  value={formData.pin_seguranca}
+                  onChange={(e) => setFormData({ ...formData, pin_seguranca: e.target.value })}
+                  className="mt-2 h-12 text-base"
+                  required
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="btn-tech w-full h-14 text-lg font-bold" 
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                    Cadastrando...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="mr-3 h-5 w-5" />
+                    Cadastrar Gratuitamente
+                  </>
+                )}
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
