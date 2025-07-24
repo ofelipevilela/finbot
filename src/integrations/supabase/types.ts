@@ -14,7 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      metas: {
+        Row: {
+          data_criacao: string
+          descricao_meta: string | null
+          id: number
+          status: string | null
+          usuario_id: string | null
+          valor_alvo: number | null
+        }
+        Insert: {
+          data_criacao?: string
+          descricao_meta?: string | null
+          id?: number
+          status?: string | null
+          usuario_id?: string | null
+          valor_alvo?: number | null
+        }
+        Update: {
+          data_criacao?: string
+          descricao_meta?: string | null
+          id?: number
+          status?: string | null
+          usuario_id?: string | null
+          valor_alvo?: number | null
+        }
+        Relationships: []
+      }
+      transacoes: {
+        Row: {
+          categoria: string | null
+          data_transacao: string | null
+          descricao: string | null
+          id: number
+          tipo: string | null
+          usuario_id: string | null
+          valor: number | null
+        }
+        Insert: {
+          categoria?: string | null
+          data_transacao?: string | null
+          descricao?: string | null
+          id?: number
+          tipo?: string | null
+          usuario_id?: string | null
+          valor?: number | null
+        }
+        Update: {
+          categoria?: string | null
+          data_transacao?: string | null
+          descricao?: string | null
+          id?: number
+          tipo?: string | null
+          usuario_id?: string | null
+          valor?: number | null
+        }
+        Relationships: []
+      }
+      usuarios: {
+        Row: {
+          created_at: string
+          id: string
+          nome: string | null
+          pin_seguranca: string | null
+          telefone_whatsapp: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nome?: string | null
+          pin_seguranca?: string | null
+          telefone_whatsapp?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nome?: string | null
+          pin_seguranca?: string | null
+          telefone_whatsapp?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
