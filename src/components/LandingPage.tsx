@@ -78,60 +78,58 @@ export const LandingPage = () => {
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="flex justify-center mb-8">
-            <div className="icon-tech">
-              <Bot className="h-16 w-16 text-primary-foreground" />
+        <div className="text-center mb-20">
+          <div className="flex justify-center mb-6">
+            <div className="relative">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/25">
+                <Bot className="h-10 w-10 text-white" />
+              </div>
             </div>
           </div>
-          <h1 className="text-7xl font-bold mb-6">
+          <h1 className="text-6xl md:text-7xl font-black mb-4 tracking-tight">
             <span className="bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent">
               FinBot
             </span>
           </h1>
-          <div className="flex items-center justify-center gap-2 mb-8">
-            <Sparkles className="h-6 w-6 text-primary animate-pulse" />
-            <p className="text-2xl text-foreground/90 font-medium">
-              Seu assistente financeiro inteligente
-            </p>
-            <Sparkles className="h-6 w-6 text-primary animate-pulse" />
-          </div>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-foreground/80 font-medium mb-6">
+            Seu assistente financeiro inteligente
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Controle suas finanças, defina metas e receba insights personalizados via WhatsApp. 
             Tecnologia de ponta para revolucionar sua vida financeira.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="tech-card p-8 text-center group">
-            <div className="icon-tech mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-              <DollarSign className="h-10 w-10 text-primary-foreground" />
+        <div className="grid md:grid-cols-3 gap-6 mb-20">
+          <div className="tech-card p-6 text-center group hover:shadow-xl transition-all duration-300">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
+              <DollarSign className="h-7 w-7 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-card-foreground">Controle Total</h3>
-            <p className="text-muted-foreground leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-card-foreground">Controle Total</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
               Monitore receitas, despesas e categorize suas transações automaticamente
               com inteligência artificial avançada
             </p>
           </div>
           
-          <div className="tech-card p-8 text-center group">
-            <div className="icon-tech mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-              <Target className="h-10 w-10 text-primary-foreground" />
+          <div className="tech-card p-6 text-center group hover:shadow-xl transition-all duration-300">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
+              <Target className="h-7 w-7 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-card-foreground">Metas Inteligentes</h3>
-            <p className="text-muted-foreground leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-card-foreground">Metas Inteligentes</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
               Defina objetivos financeiros e acompanhe seu progresso em tempo real
               com análises preditivas
             </p>
           </div>
           
-          <div className="tech-card p-8 text-center group">
-            <div className="icon-tech mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-              <TrendingUp className="h-10 w-10 text-primary-foreground" />
+          <div className="tech-card p-6 text-center group hover:shadow-xl transition-all duration-300">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
+              <TrendingUp className="h-7 w-7 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-card-foreground">Insights Personalizados</h3>
-            <p className="text-muted-foreground leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-card-foreground">Insights Personalizados</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
               Receba análises e dicas personalizadas direto no seu WhatsApp
               com relatórios automatizados
             </p>
@@ -139,11 +137,11 @@ export const LandingPage = () => {
         </div>
 
         {/* Cadastro Form */}
-        <div className="max-w-lg mx-auto">
-          <div className="tech-card p-8">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-3 text-card-foreground">Comece Agora</h2>
-              <p className="text-muted-foreground">
+        <div className="max-w-md mx-auto">
+          <div className="tech-card p-6 md:p-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-card-foreground">Comece Agora</h2>
+              <p className="text-muted-foreground text-sm">
                 Cadastre-se gratuitamente e transforme sua vida financeira
               </p>
             </div>
