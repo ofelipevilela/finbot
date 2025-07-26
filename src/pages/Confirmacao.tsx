@@ -22,7 +22,7 @@ const Confirmacao = () => {
           </div>
           
           <div className="space-y-3">
-            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-light">
+            <h1 className="text-3xl font-bold text-accent">
               Cadastro Realizado!
             </h1>
             <p className="text-muted-foreground text-lg">
