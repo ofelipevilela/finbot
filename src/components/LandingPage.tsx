@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +16,7 @@ export const LandingPage = () => {
     pin_seguranca: ""
   });
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,11 +52,11 @@ export const LandingPage = () => {
 
       toast({
         title: "Cadastro realizado com sucesso!",
-        description: "Bem-vindo ao FinBot. Seu assistente financeiro pessoal está pronto.",
+        description: "Redirecionando para confirmação...",
       });
 
-      // Resetar formulário
-      setFormData({ nome: "", telefone_whatsapp: "", pin_seguranca: "" });
+      // Redirecionar para página de confirmação
+      navigate("/confirmacao");
 
     } catch (error: any) {
       toast({
