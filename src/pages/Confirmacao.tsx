@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const Confirmacao = () => {
   const handleWhatsAppRedirect = () => {
-    const phoneNumber = "5511999999999"; // Substitua pelo seu número do WhatsApp
+    const phoneNumber = "5532999723326"; // Número do WhatsApp Business
     const message = encodeURIComponent(
       "Olá! Acabei de me cadastrar no sistema financeiro e gostaria de começar a usar o bot para gerenciar minhas finanças. Pode me ajudar?"
     );
