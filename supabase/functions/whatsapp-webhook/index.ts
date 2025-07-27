@@ -6,10 +6,22 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface WhatsAppMessage {
-  from: string;
-  body: string;
-  timestamp: number;
+// Configuração da Evolution API
+const evolutionApiKey = Deno.env.get('EVOLUTION_API_KEY');
+const evolutionApiUrl = Deno.env.get('EVOLUTION_API_URL');
+const webhookVerifyToken = Deno.env.get('WEBHOOK_VERIFY_TOKEN');
+const evolutionInstance = Deno.env.get('EVOLUTION_INSTANCE_NAME');
+
+interface EvolutionMessage {
+  key: {
+    remoteJid: string;
+    fromMe: boolean;
+    id: string;
+  };
+  message: {
+    conversation?: string;
+  };
+  messageTimestamp: number;
 }
 
 serve(async (req) => {
@@ -24,29 +36,40 @@ serve(async (req) => {
     )
 
     if (req.method === 'GET') {
-      // Webhook verification for WhatsApp
+      // Webhook verification for Evolution API
       const url = new URL(req.url)
-      const mode = url.searchParams.get('hub.mode')
-      const token = url.searchParams.get('hub.verify_token')
-      const challenge = url.searchParams.get('hub.challenge')
+      const token = url.searchParams.get('token')
 
-      if (mode === 'subscribe' && token === Deno.env.get('WEBHOOK_VERIFY_TOKEN')) {
-        console.log('Webhook verified successfully!')
-        return new Response(challenge, { status: 200 })
+      if (token === webhookVerifyToken) {
+        console.log('Evolution API webhook verified successfully!')
+        return new Response('Webhook verified', { status: 200 })
       } else {
+        console.log('Failed webhook verification')
         return new Response('Forbidden', { status: 403 })
       }
     }
 
     if (req.method === 'POST') {
       const body = await req.json()
-      console.log('Received webhook:', JSON.stringify(body, null, 2))
+      console.log('Received Evolution API webhook:', JSON.stringify(body, null, 2))
 
-      // Process WhatsApp messages
-      if (body.entry && body.entry[0].changes && body.entry[0].changes[0].value.messages) {
-        const message = body.entry[0].changes[0].value.messages[0]
-        const phoneNumber = message.from
-        const messageText = message.text.body.toLowerCase()
+      // Process Evolution API message events
+      if (body.event === 'messages.upsert' && body.data) {
+        const messageData = body.data
+        
+        // Check if message is not from the bot itself
+        if (messageData.key.fromMe) {
+          console.log('Message from bot, ignoring')
+          return new Response('OK', { status: 200 })
+        }
+
+        const phoneNumber = messageData.key.remoteJid.split('@')[0]
+        const messageText = messageData.message?.conversation?.toLowerCase() || ''
+
+        if (!messageText) {
+          console.log('No text message content')
+          return new Response('OK', { status: 200 })
+        }
 
         console.log(`Processing message from ${phoneNumber}: ${messageText}`)
 
@@ -59,14 +82,21 @@ serve(async (req) => {
 
         if (userError || !userData) {
           console.log('User not found for phone:', phoneNumber)
-          return new Response('User not found', { status: 404 })
+          // Send a welcome message for unregistered users
+          await sendEvolutionMessage(phoneNumber, 
+            "👋 Olá! Parece que você ainda não está cadastrado no nosso sistema financeiro.\n\n" +
+            "Para começar a usar o bot, acesse nosso site e faça seu cadastro:\n" +
+            "https://seu-dominio.com/\n\n" +
+            "Após o cadastro, você poderá usar todos os recursos do bot! 🤖💰"
+          )
+          return new Response('OK', { status: 200 })
         }
 
         // Process the message and generate response
         const response = await processFinancialMessage(messageText, userData, supabase)
         
-        // Send response back to WhatsApp (this would be implemented with WhatsApp API)
-        console.log('Generated response:', response)
+        // Send response back via Evolution API
+        await sendEvolutionMessage(phoneNumber, response)
 
         return new Response(JSON.stringify({ status: 'success', response }), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -267,4 +297,35 @@ async function processFinancialMessage(message: string, user: any, supabase: any
 
   // Default response
   return `Olá ${user.nome}! 👋\n\nNão entendi sua mensagem. Aqui estão alguns comandos que você pode usar:\n\n💸 "Gastei R$50 em almoço"\n💰 "Recebi meu salário de R$3000"\n💳 "Qual meu saldo?"\n📊 "Gerar relatório"\n🎯 "Quero economizar R$500"\n📂 "Quanto gastei com alimentação?"\n💡 "Dicas"\n\nComo posso te ajudar hoje?`
+}
+
+// Função para enviar mensagens via Evolution API
+async function sendEvolutionMessage(phoneNumber: string, message: string): Promise<void> {
+  if (!evolutionApiUrl || !evolutionApiKey || !evolutionInstance) {
+    console.error('Evolution API configuration missing')
+    return
+  }
+
+  try {
+    const response = await fetch(`${evolutionApiUrl}/message/sendText/${evolutionInstance}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': evolutionApiKey
+      },
+      body: JSON.stringify({
+        number: phoneNumber,
+        text: message
+      })
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error('Error sending message via Evolution API:', response.status, errorText)
+    } else {
+      console.log('Message sent successfully via Evolution API')
+    }
+  } catch (error) {
+    console.error('Error sending message via Evolution API:', error)
+  }
 }
