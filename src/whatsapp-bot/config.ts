@@ -10,7 +10,7 @@ export const BOT_CONFIG = {
   WELCOME_MESSAGE: `👋 Olá! Parece que você ainda não está cadastrado no nosso sistema financeiro.
 
 Para começar a usar o bot, acesse nosso site e faça seu cadastro:
-https://finbot.tiiny.site
+https://[SEU_USUARIO].github.io/my-fin-assistant-1
 
 Após o cadastro, você poderá usar todos os recursos do bot! 🤖💰`,
 

@@ -1,73 +1,132 @@
-# Welcome to your Lovable project
+# 🤖 FinBot - Assistente Financeiro WhatsApp
 
-## Project info
+Um bot inteligente de WhatsApp para controle financeiro pessoal, desenvolvido com React, TypeScript e Supabase.
 
-**URL**: https://lovable.dev/projects/ae538878-4d0b-47d8-981a-f1d6a65038a6
+## 🚀 Funcionalidades
 
-## How can I edit this code?
+- ✅ **Registro automático de despesas e receitas**
+- ✅ **Categorização inteligente** (Alimentação, Mercado, Transporte, Carro, Saúde, etc.)
+- ✅ **Consulta de saldo** em tempo real
+- ✅ **Relatórios detalhados** por categoria
+- ✅ **Definição de metas** financeiras
+- ✅ **Dicas financeiras** personalizadas
+- ✅ **Interface web** para cadastro de usuários
 
-There are several ways of editing your application.
+## 🛠️ Tecnologias
 
-**Use Lovable**
+- **Frontend**: React + TypeScript + Vite
+- **UI**: Tailwind CSS + Shadcn/ui
+- **WhatsApp Bot**: Baileys + Node.js
+- **Backend**: Supabase (PostgreSQL)
+- **Deploy**: GitHub Pages
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ae538878-4d0b-47d8-981a-f1d6a65038a6) and start prompting.
+## 📱 Como Usar
 
-Changes made via Lovable will be committed automatically to this repo.
+### 1. Cadastro
+Acesse a landing page e faça seu cadastro:
+```
+https://[SEU_USUARIO].github.io/my-fin-assistant-1
+```
 
-**Use your preferred IDE**
+### 2. Comandos do Bot
+- 💸 **"Gastei R$50 no almoço"** - Registrar despesa
+- 💰 **"Recebi R$3000 de salário"** - Registrar receita
+- 💳 **"Saldo"** - Consultar saldo atual
+- 📊 **"Relatório"** - Ver resumo do mês
+- 🎯 **"Quero economizar R$500"** - Definir meta
+- 📂 **"Quanto gastei com alimentação?"** - Gastos por categoria
+- 💡 **"Dicas"** - Receber dicas financeiras
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🏗️ Instalação Local
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone o repositório
+git clone https://github.com/[SEU_USUARIO]/my-fin-assistant-1.git
+cd my-fin-assistant-1
 
-Follow these steps:
+# Instale as dependências
+npm install
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o arquivo .env com suas credenciais do Supabase
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Execute o bot
+npm run bot
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Em outro terminal, execute o frontend
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🚀 Deploy
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### GitHub Pages (Automático)
+O projeto está configurado para deploy automático no GitHub Pages. A cada push para a branch `main`, o site será atualizado automaticamente.
 
-**Use GitHub Codespaces**
+### Deploy Manual
+```bash
+npm run deploy
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📊 Categorias Disponíveis
 
-## What technologies are used for this project?
+- **Alimentação**: almoço, café, jantar, restaurante, etc.
+- **Mercado**: supermercado, compras, feira, padaria, etc.
+- **Transporte**: gasolina, uber, ônibus, passagem, etc.
+- **Carro**: mecânico, oficina, manutenção, seguro, etc.
+- **Saúde**: farmácia, médico, consulta, dentista, etc.
+- **Educação**: escola, faculdade, curso, livros, etc.
+- **Lazer**: cinema, teatro, viagem, academia, etc.
+- **Serviços**: conta, luz, internet, assinaturas, etc.
 
-This project is built with:
+## 🔧 Configuração
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Variáveis de Ambiente
+Crie um arquivo `.env` na raiz do projeto:
 
-## How can I deploy this project?
+```env
+VITE_SUPABASE_URL=sua_url_do_supabase
+VITE_SUPABASE_ANON_KEY=sua_chave_anonima_do_supabase
+SUPABASE_SERVICE_ROLE_KEY=sua_chave_service_role_do_supabase
+```
 
-Simply open [Lovable](https://lovable.dev/projects/ae538878-4d0b-47d8-981a-f1d6a65038a6) and click on Share -> Publish.
+### Supabase Setup
+1. Crie um projeto no Supabase
+2. Execute as migrações SQL em `supabase/migrations/`
+3. Configure as tabelas: `usuarios`, `transacoes`, `metas`
+4. Desabilite RLS (Row Level Security) para as tabelas
 
-## Can I connect a custom domain to my Lovable project?
+## 📝 Estrutura do Projeto
 
-Yes, you can!
+```
+my-fin-assistant-1/
+├── src/
+│   ├── components/          # Componentes React
+│   ├── pages/              # Páginas da aplicação
+│   ├── whatsapp-bot/       # Lógica do bot WhatsApp
+│   ├── integrations/       # Integrações (Supabase)
+│   └── lib/               # Utilitários
+├── supabase/              # Configurações do Supabase
+├── .github/workflows/     # GitHub Actions
+└── public/               # Arquivos estáticos
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🤝 Contribuição
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 🆘 Suporte
+
+Se você encontrar algum problema ou tiver dúvidas, abra uma issue no GitHub.
+
+---
+
+**Desenvolvido com ❤️ para controle financeiro inteligente!**
