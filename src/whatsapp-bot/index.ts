@@ -33,6 +33,34 @@ if (typeof useMultiFileAuthState !== 'function') {
   throw new Error('❌ useMultiFileAuthState não pôde ser carregado. Verifique sua versão do Baileys.')
 }
 
+// Função para categorizar automaticamente baseada em palavras-chave
+function categorizeExpense(message: string): string {
+  const messageLower = message.toLowerCase()
+  
+  // Ordem de prioridade das categorias (mais específicas primeiro)
+  const priorityCategories = [
+    'CARRO',
+    'SAUDE', 
+    'EDUCACAO',
+    'LAZER',
+    'SERVICOS',
+    'ALIMENTACAO',
+    'MERCADO',
+    'TRANSPORTE',
+    'OUTROS'
+  ]
+  
+  // Verificar cada categoria na ordem de prioridade
+  for (const categoryKey of priorityCategories) {
+    const category = BOT_CONFIG.CATEGORIES[categoryKey]
+    if (category.keywords.some(keyword => messageLower.includes(keyword))) {
+      return category.name
+    }
+  }
+  
+  return 'Outros'
+}
+
 // Função para processar mensagens financeiras (copiada do webhook do Supabase)
 async function processFinancialMessage(message: string, user: any): Promise<string> {
   const currentMonth = new Date().getMonth() + 1
@@ -41,11 +69,10 @@ async function processFinancialMessage(message: string, user: any): Promise<stri
   // RF2: Registrar despesas
   if (BOT_CONFIG.COMMANDS.EXPENSE.some(cmd => message.includes(cmd))) {
     const valueMatch = message.match(BOT_CONFIG.PATTERNS.VALUE)
-    const categoryMatch = message.match(BOT_CONFIG.PATTERNS.CATEGORY)
     
     if (valueMatch) {
       const valor = parseFloat(valueMatch[1].replace(',', '.'))
-      const categoria = categoryMatch ? categoryMatch[1].trim() : 'outros'
+      const categoria = categorizeExpense(message)
       
       const { error } = await supabase
         .from('transacoes')
