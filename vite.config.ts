@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/my-fin-assistant-1/', // Importante para GitHub Pages
+  base: '/finbot/', // Importante para GitHub Pages
   server: {
     host: "::",
     port: 8080,

@@ -25,7 +25,7 @@ Um bot inteligente de WhatsApp para controle financeiro pessoal, desenvolvido co
 ### 1. Cadastro
 Acesse a landing page e faça seu cadastro:
 ```
-https://[SEU_USUARIO].github.io/my-fin-assistant-1
+https://ofelipevilela.github.io/finbot/
 ```
 
 ### 2. Comandos do Bot
@@ -41,8 +41,8 @@ https://[SEU_USUARIO].github.io/my-fin-assistant-1
 
 ```bash
 # Clone o repositório
-git clone https://github.com/[SEU_USUARIO]/my-fin-assistant-1.git
-cd my-fin-assistant-1
+git clone https://github.com/ofelipevilela/finbot.git
+cd finbot
 
 # Instale as dependências
 npm install
