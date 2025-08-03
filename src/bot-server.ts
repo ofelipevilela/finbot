@@ -1,8 +1,11 @@
-import { iniciarBot } from './whatsapp-bot'
+import dotenv from "dotenv";
+dotenv.config();
 
-// Inicializar o bot quando este arquivo for executado
-console.log('🤖 Iniciando bot de WhatsApp...')
+import { logger } from "./whatsapp-bot/logger";
+import { iniciarBot } from "./whatsapp-bot";
+
+logger.info("Iniciando bot de WhatsApp...");
 iniciarBot().catch((error) => {
-  console.error('❌ Erro ao iniciar o bot:', error)
-  process.exit(1)
-}) 
+  logger.error("Erro ao iniciar o bot", { error });
+  process.exit(1);
+});
