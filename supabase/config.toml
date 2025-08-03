@@ -1,9 +1,0 @@
-project_id = "hpxwusfieqrkfggdwhpi"
-
-[auth]
-enabled = true
-site_url = "http://localhost:3000"
-additional_redirect_urls = ["https://localhost:3000"]
-
-[functions.whatsapp-webhook]
-verify_jwt = false
