@@ -3,17 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Bot, DollarSign, Target, TrendingUp, Sparkles } from "lucide-react";
+import {
+  Loader2,
+  Bot,
+  DollarSign,
+  Target,
+  TrendingUp,
+  Sparkles,
+} from "lucide-react";
 
 export const LandingPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     nome: "",
     telefone_whatsapp: "",
-    pin_seguranca: ""
+    pin_seguranca: "",
   });
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -31,22 +44,20 @@ export const LandingPage = () => {
           emailRedirectTo: `${window.location.origin}/`,
           data: {
             nome: formData.nome,
-            telefone_whatsapp: formData.telefone_whatsapp
-          }
-        }
+            telefone_whatsapp: formData.telefone_whatsapp,
+          },
+        },
       });
 
       if (authError) throw authError;
 
       // Depois, criar perfil na tabela usuarios
-      const { error: profileError } = await supabase
-        .from('usuarios')
-        .insert({
-          id: authData.user?.id,
-          nome: formData.nome,
-          telefone_whatsapp: formData.telefone_whatsapp,
-          pin_seguranca: formData.pin_seguranca
-        });
+      const { error: profileError } = await supabase.from("usuarios").insert({
+        id: authData.user?.id,
+        nome: formData.nome,
+        telefone_whatsapp: formData.telefone_whatsapp,
+        pin_seguranca: formData.pin_seguranca,
+      });
 
       if (profileError) throw profileError;
 
@@ -57,12 +68,11 @@ export const LandingPage = () => {
 
       // Redirecionar para página de confirmação
       navigate("/confirmacao");
-
     } catch (error: any) {
       toast({
         title: "Erro no cadastro",
         description: error.message || "Tente novamente",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -97,8 +107,9 @@ export const LandingPage = () => {
             Seu assistente financeiro inteligente
           </p>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Controle suas finanças, defina metas e receba insights personalizados via WhatsApp. 
-            Tecnologia de ponta para revolucionar sua vida financeira.
+            Controle suas finanças, defina metas e receba insights
+            personalizados via WhatsApp. Tecnologia de ponta para revolucionar
+            sua vida financeira.
           </p>
         </div>
 
@@ -108,32 +119,38 @@ export const LandingPage = () => {
             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
               <DollarSign className="h-7 w-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-card-foreground">Controle Total</h3>
+            <h3 className="text-xl font-bold mb-3 text-card-foreground">
+              Controle Total
+            </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Monitore receitas, despesas e categorize suas transações automaticamente
-              com inteligência artificial avançada
+              Monitore receitas, despesas e categorize suas transações
+              automaticamente com inteligência artificial avançada
             </p>
           </div>
-          
+
           <div className="tech-card p-6 text-center group hover:shadow-xl transition-all duration-300">
             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
               <Target className="h-7 w-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-card-foreground">Metas Inteligentes</h3>
+            <h3 className="text-xl font-bold mb-3 text-card-foreground">
+              Metas Inteligentes
+            </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Defina objetivos financeiros e acompanhe seu progresso em tempo real
-              com análises preditivas
+              Defina objetivos financeiros e acompanhe seu progresso em tempo
+              real com análises preditivas
             </p>
           </div>
-          
+
           <div className="tech-card p-6 text-center group hover:shadow-xl transition-all duration-300">
             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-primary/25 group-hover:scale-105 transition-transform duration-300">
               <TrendingUp className="h-7 w-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-card-foreground">Insights Personalizados</h3>
+            <h3 className="text-xl font-bold mb-3 text-card-foreground">
+              Insights Personalizados
+            </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Receba análises e dicas personalizadas direto no seu WhatsApp
-              com relatórios automatizados
+              Receba análises e dicas personalizadas direto no seu WhatsApp com
+              relatórios automatizados
             </p>
           </div>
         </div>
@@ -142,56 +159,82 @@ export const LandingPage = () => {
         <div className="max-w-md mx-auto">
           <div className="tech-card p-6 md:p-8">
             <div className="text-center mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-card-foreground">Comece Agora</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-card-foreground">
+                Comece Agora
+              </h2>
               <p className="text-muted-foreground text-sm">
                 Cadastre-se gratuitamente e transforme sua vida financeira
               </p>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="input-tech">
-                <Label htmlFor="nome" className="text-card-foreground font-medium">Nome Completo</Label>
+                <Label
+                  htmlFor="nome"
+                  className="text-card-foreground font-medium"
+                >
+                  Nome Completo
+                </Label>
                 <Input
                   id="nome"
                   type="text"
                   placeholder="Seu nome completo"
                   value={formData.nome}
-                  onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, nome: e.target.value })
+                  }
                   className="mt-2 h-12 text-base"
                   required
                 />
               </div>
-              
+
               <div className="input-tech">
-                <Label htmlFor="telefone" className="text-card-foreground font-medium">WhatsApp</Label>
+                <Label
+                  htmlFor="telefone"
+                  className="text-card-foreground font-medium"
+                >
+                  WhatsApp
+                </Label>
                 <Input
                   id="telefone"
                   type="tel"
                   placeholder="(11) 99999-9999"
                   value={formData.telefone_whatsapp}
-                  onChange={(e) => setFormData({ ...formData, telefone_whatsapp: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      telefone_whatsapp: e.target.value,
+                    })
+                  }
                   className="mt-2 h-12 text-base"
                   required
                 />
               </div>
-              
+
               <div className="input-tech">
-                <Label htmlFor="pin" className="text-card-foreground font-medium">PIN de Segurança (6 dígitos)</Label>
+                <Label
+                  htmlFor="pin"
+                  className="text-card-foreground font-medium"
+                >
+                  PIN de Segurança (6 dígitos)
+                </Label>
                 <Input
                   id="pin"
                   type="password"
                   placeholder="••••••"
                   maxLength={6}
                   value={formData.pin_seguranca}
-                  onChange={(e) => setFormData({ ...formData, pin_seguranca: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, pin_seguranca: e.target.value })
+                  }
                   className="mt-2 h-12 text-base"
                   required
                 />
               </div>
-              
-              <Button 
-                type="submit" 
-                className="btn-tech w-full h-14 text-lg font-bold" 
+
+              <Button
+                type="submit"
+                className="btn-tech w-full h-14 text-lg font-bold"
                 disabled={isLoading}
               >
                 {isLoading ? (

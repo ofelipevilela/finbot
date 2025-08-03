@@ -81,14 +81,23 @@ npm run deploy
 
 ## 🔧 Configuração
 
-### Variáveis de Ambiente
-Crie um arquivo `.env` na raiz do projeto:
 
-```env
-VITE_SUPABASE_URL=sua_url_do_supabase
-VITE_SUPABASE_ANON_KEY=sua_chave_anonima_do_supabase
-SUPABASE_SERVICE_ROLE_KEY=sua_chave_service_role_do_supabase
+### Variáveis de Ambiente
+Copie `.env.example` para `.env` e preencha os valores conforme seu ambiente (dev/prod):
+
+```bash
+cp .env.example .env
+# Edite .env com as chaves do seu Supabase e outras variáveis necessárias
 ```
+
+**Frontend (Vite):**
+- `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` são usados pelo React/Vite.
+
+**Backend/Bot:**
+- `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` são usados pelo Node.js/bot.
+- `SUPABASE_SERVICE_ROLE_KEY` (opcional, para scripts/admin).
+
+Você pode criar diferentes arquivos `.env` para cada ambiente (ex: `.env.development`, `.env.production`) e usar ferramentas como [dotenv-cli](https://www.npmjs.com/package/dotenv-cli) para gerenciar múltiplos ambientes.
 
 ### Supabase Setup
 1. Crie um projeto no Supabase
@@ -98,18 +107,45 @@ SUPABASE_SERVICE_ROLE_KEY=sua_chave_service_role_do_supabase
 
 ## 📝 Estrutura do Projeto
 
+
 ```
-my-fin-assistant-1/
+finbot/
 ├── src/
-│   ├── components/          # Componentes React
-│   ├── pages/              # Páginas da aplicação
-│   ├── whatsapp-bot/       # Lógica do bot WhatsApp
-│   ├── integrations/       # Integrações (Supabase)
-│   └── lib/               # Utilitários
-├── supabase/              # Configurações do Supabase
-├── .github/workflows/     # GitHub Actions
-└── public/               # Arquivos estáticos
+│   ├── components/        # Componentes React (ui/ = componentes reutilizáveis)
+│   ├── pages/             # Páginas da aplicação
+│   ├── whatsapp-bot/      # Lógica do bot WhatsApp
+│   ├── integrations/      # Integrações externas (ex: supabase)
+│   ├── hooks/             # React hooks customizados
+│   ├── lib/               # Funções utilitárias
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── supabase/              # Configuração e migrações do banco
+│   └── migrations/
+├── public/                # Arquivos estáticos
+├── scripts/               # Scripts utilitários e testes manuais
+│   ├── cadastrar-usuario.js
+│   ├── test-supabase.js
+│   ├── teste-categorizacao.js
+│   ├── teste-normalizacao.js
+│   ├── verificar-tabela.js
+│   └── test-supabase-connection.js
+├── .github/               # Workflows e instruções
+├── .env                   # Variáveis de ambiente
+├── .env.example           # Exemplo de variáveis de ambiente
+├── package.json           # Dependências e scripts
+├── tsconfig.json          # Configuração TypeScript
+├── vite.config.ts         # Configuração Vite
+├── ...                    # Outros arquivos de configuração
+├── README.md
+└── ...
 ```
+
+**Boas práticas de organização:**
+- Scripts utilitários e testes manuais devem ficar em `scripts/` para não poluir a raiz.
+- Todo o código fonte da aplicação fica em `src/`.
+- Migrações e configurações do banco ficam em `supabase/`.
+- Variáveis de ambiente separadas por arquivo para facilitar dev/prod.
 
 ## 🤝 Contribuição
 
@@ -129,4 +165,4 @@ Se você encontrar algum problema ou tiver dúvidas, abra uma issue no GitHub.
 
 ---
 
-**Desenvolvido com ❤️ para controle financeiro inteligente!**
+**Desenvolvido para controle financeiro inteligente!**

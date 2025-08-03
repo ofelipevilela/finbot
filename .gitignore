@@ -75,3 +75,5 @@ dist/
 .env.production.local
 
 .env
+
+*.json
