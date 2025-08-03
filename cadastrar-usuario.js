@@ -1,7 +1,13 @@
 import { createClient } from '@supabase/supabase-js'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const SUPABASE_URL = "https://hpxwusfieqrkfggdwhpi.supabase.co"
-const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhweHd1c2ZpZXFya2ZnZ2R3aHBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzNzA2MjUsImV4cCI6MjA2ODk0NjYyNX0.2UfmS40imK1_GVSKh0U7LEvrOTsQ8j5i6o6ABGSB88U"
+const SUPABASE_URL = process.env.SUPABASE_URL
+const SUPABASE_PUBLISHABLE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY
+
+if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+  throw new Error('Variáveis de ambiente SUPABASE_URL e SUPABASE_PUBLISHABLE_KEY não definidas.')
+}
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
