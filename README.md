@@ -47,9 +47,10 @@ cd finbot
 # Instale as dependências
 npm install
 
-# Configure as variáveis de ambiente
+# Configuraçao das variáveis de ambiente:
+# Edite o arquivo ".env.example" com suas credenciais do Supabase
 cp .env.example .env
-# Edite o arquivo .env com suas credenciais do Supabase
+
 
 # Execute o bot
 npm run bot
