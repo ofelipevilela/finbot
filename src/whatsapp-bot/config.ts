@@ -46,7 +46,7 @@ Após o cadastro, você poderá usar todos os recursos do bot! 🤖💰`,
     },
     TRANSPORTE: {
       name: 'Transporte',
-      keywords: ['gasolina', 'combustível', 'combustivel', 'abastecimento', 'uber', '99', 'taxi', 'táxi', 'ônibus', 'onibus', 'metrô', 'metro', 'passagem', 'estacionamento', 'pedágio', 'pedagio', 'fuel', 'gas', 'transport']
+      keywords: ['gasolina', 'combustível', 'combustivel', 'abastecimento', 'uber', '99', 'taxi', 'táxi', 'ônibus', 'onibus', 'metrô', 'metro', 'passagem', 'estacionamento', 'pedágio', 'pedagio', 'fuel', 'transport']
     },
     CARRO: {
       name: 'Carro',

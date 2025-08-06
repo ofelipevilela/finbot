@@ -56,10 +56,14 @@ function categorizeExpense(message: string): string {
     "OUTROS",
   ];
 
-  // Verificar cada categoria na ordem de prioridade
   for (const categoryKey of priorityCategories) {
     const category = BOT_CONFIG.CATEGORIES[categoryKey];
-    if (category.keywords.some((keyword) => messageLower.includes(keyword))) {
+    const found = category.keywords.some((keyword) => {
+      const regex = new RegExp(`\\b${keyword}\\b`, "i");
+      return regex.test(messageLower);
+    });
+
+    if (found) {
       return category.name;
     }
   }
